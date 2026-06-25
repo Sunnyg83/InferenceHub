@@ -1,0 +1,9 @@
+# Prometheus runs inside Docker and scrapes FastAPI by service name (not localhost).
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: fastapi
+    static_configs:
+      - targets:
+          - fastapi:8000
