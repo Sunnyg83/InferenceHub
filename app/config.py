@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     # RAG (used in Phase 7–8)
     rag_top_k: int = 5
     embedding_model: str = "all-MiniLM-L6-v2"
+    embedding_dim: int = 384
 
 
 settings = Settings()

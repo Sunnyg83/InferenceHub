@@ -3,6 +3,7 @@ import redis
 from fastapi import APIRouter
 
 from app.config import settings
+from app.services.qdrant import collections_ready
 
 router = APIRouter(tags=["health"])
 
@@ -52,10 +53,16 @@ def health():
         "ollama": _check_ollama(),
         "ollama_model": _check_ollama_model(),
     }
+    qdrant_collections = collections_ready()
+    services["qdrant_collections"] = all(qdrant_collections.values())
+
     core_ok = services["redis"] and services["qdrant"] and services["ollama"]
     return {
-        "status": "ok" if core_ok and services["ollama_model"] else "degraded",
+        "status": "ok"
+        if core_ok and services["ollama_model"] and services["qdrant_collections"]
+        else "degraded",
         "services": services,
+        "qdrant_collections": qdrant_collections,
         "config": {
             "redis_url": settings.redis_url,
             "qdrant_url": settings.qdrant_url,
@@ -65,5 +72,6 @@ def health():
             "semantic_threshold": settings.semantic_threshold,
             "rag_top_k": settings.rag_top_k,
             "embedding_model": settings.embedding_model,
+            "embedding_dim": settings.embedding_dim,
         },
     }

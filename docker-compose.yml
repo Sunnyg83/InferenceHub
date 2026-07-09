@@ -13,6 +13,7 @@ services:
       - SEMANTIC_THRESHOLD=0.90
       - RAG_TOP_K=5
       - EMBEDDING_MODEL=all-MiniLM-L6-v2
+      - EMBEDDING_DIM=384
     depends_on:
       - redis
       - qdrant
