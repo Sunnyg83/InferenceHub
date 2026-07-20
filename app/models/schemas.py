@@ -8,3 +8,4 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     answer: str
+    cache_hit: bool = False
