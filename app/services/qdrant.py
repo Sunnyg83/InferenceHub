@@ -10,7 +10,7 @@ COLLECTIONS = [SEMANTIC_CACHE_COLLECTION, DOCUMENTS_COLLECTION]
 
 
 def get_qdrant_client() -> QdrantClient:
-    return QdrantClient(url=settings.qdrant_url)
+    return QdrantClient(url=settings.qdrant_url, check_compatibility=False)
 
 
 def ensure_collections() -> None:

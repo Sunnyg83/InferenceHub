@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # Caching (used in Phase 5–6)
     redis_ttl_seconds: int = 3600
-    semantic_threshold: float = 0.90
+    semantic_threshold: float = 0.85
 
     # RAG (used in Phase 7–8)
     rag_top_k: int = 5

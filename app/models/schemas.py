@@ -9,3 +9,4 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     answer: str
     cache_hit: bool = False
+    cache_type: str | None = None  # "exact", "semantic", or null on miss
